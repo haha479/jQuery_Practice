@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        /*tr,td{*/
+            /*border: 1px solid black;*/
+        /*}*/
+    </style>
+    <script>
+        //this 是dom对象
+        window.addEventListener("load",loadHandler);
+
+        function loadHandler(e) {
+            e = e || window.event;
+            //为三个按钮绑定单击事件
+            $("#checkAll").on("click",checkAllHandler);
+            $("#reverseAll").on("click",reverseAllHandler);
+            $("#cancelAll").on("click",cancelAllHandler);
+
+            //全选
+            function checkAllHandler() {
+                $(":checkbox").prop("checked",true)
+            }
+
+            //反选
+            function reverseAllHandler() {
+                //遍历所有单选框
+                $.each($(":checkbox"),function (index,value) {
+                    //this是dom对象，注释的是用dom方法来完成的
+//                    if(this.checked){
+//                        this.checked = false
+//                    }else{
+//                        this.checked = true
+//                    }
+                    console.log(this,value)
+                    //JQuery方法
+//                    console.log($(this).prop("checked"))
+//                    if($(this).prop("checked")){
+//                        $(this).prop("checked",false)
+//                    }else{
+//                        $(this).prop("checked",true)
+//                    }
+
+                    //三元运算var v= 条件?真值:假值
+//                    var v = $(this).prop("checked") ? false:true;
+//                    $(this).prop("checked",v)
+//                    var v = 1<2 ? false:true
+//                    console.log(v)
+
+                })
+
+            }
+
+            //取消所有
+            function cancelAllHandler() {
+                $(":checkbox").prop("checked",false)
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="全选" id="checkAll">
+<input type="button" value="反选" id="reverseAll">
+<input type="button" value="取消" id="cancelAll">
+<table border="1px">
+    <tr>
+        <th>选项</th>
+        <th>IP</th>
+        <th>POPR</th>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>1,1,1</td>
+        <td>80</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>1,1,1</td>
+        <td>80</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>1,1,1</td>
+        <td>80</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>1,1,1</td>
+        <td>80</td>
+    </tr>
+
+</table>
+</body>
+</html>

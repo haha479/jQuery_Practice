@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            border-top:10px yellow solid ;
+            padding-top: 20px;
+            padding-bottom: 30px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        console.log("height = "+$("div").height())
+        //innerHeight包括内边距
+        console.log("innnerheight = "+$("div").innerHeight())
+        //outerHeight包括边距，边框
+        console.log("outerHeight = "+$("div").outerHeight())
+        //outerHeight(true)还包括一个外边距
+        console.log("outerHeight(true) = "+$("div").outerHeight(true))
+    </script>
+</body>
+</html>

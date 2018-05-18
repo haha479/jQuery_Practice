@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        .header{
+            background: skyblue;
+
+        }
+        .content{
+            min-height: 50px;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+    <script>
+        window.addEventListener("load",loadHandler)
+
+        function loadHandler(e) {
+            e = e || window.event
+
+            $(".header").click(function () {
+//                $(this).next().removeClass("hide")
+//                if($(this).children(".content").hasClass("hide")){
+//                    $(this).children(".content").removeClass("hide")
+//                    $(this).siblings().children(".content").addClass("hide")
+//                }else{
+//                    $(this).children(".content").addClass("hide")
+//                    $(this).siblings().children(".content").remove("hide")
+//                }
+                //将点击的元素删除指定类，也就是将点击的div的内容显示出来
+                $(this).siblings().removeClass("hide")
+                //将除了点击的div以外的div的内容隐藏
+                $(this).parents().siblings().find(".content").addClass("hide")
+
+
+            })
+
+        }
+    </script>
+</head>
+<body>
+<div style="height:400px; width:200px ;border: 1px solid black ">
+    <div class="item">
+        <div class="header">标题一</div>
+        <div class="content hide">内容</div>
+    </div>
+    <div class="item">
+        <div class="header">标题二</div>
+        <div class="content hide">内容</div>
+    </div>
+    <div class="item">
+        <div class="header">标题三</div>
+        <div class="content hide">内容</div>
+    </div>
+</div>
+</body>
+</html>

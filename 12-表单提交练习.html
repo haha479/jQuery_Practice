@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form action="08-点赞练习.html" method="POST">
+    <div><input name="in1" type="text"></div>
+    <div><input name="in2" type="text"></div>
+    <div><input name="in3" type="password"></div>
+    <div><input name="in4" type="text"></div>
+    <div><input name="in5" type="text"></div>
+    <input type="submit" value="提交">
+</form>
+<script>
+    $("input[type='submit']").click(function () {
+
+        //每次单击时，先删除掉现有的提示元素span
+        $(".error").remove()
+
+        var flag = true
+        $("form").children().children().each(function () {
+            var v = $(this).val().length;
+            //如果遍历到有输入框内无内容的
+            if(v <= 0 ){
+                //赋值给上边的flag值false，让页面不会跳转
+                flag = false;
+                //在输入框后边放一个span来做提示
+//                var tag = document.createElement("span")
+//                tag.className = "error"
+//                tag.innerHTML = "必填"
+//                $(this).after(tag)
+                var span = $("<span></span>").text("不能为空").css("color","red").addClass("error")
+                $(this).after(span)
+
+                //这个取消的是当前循环函数的默认行为,
+                //不会影响到外面单击函数
+                //但是如果遍历到一个为空的输入框就会结束整个循环函数
+//                return false
+
+            }
+        });
+        return flag
+    })
+</script>
+</body>
+</html>

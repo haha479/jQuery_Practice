@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+    </ul>
+    <button id="btn1">添加</button>
+    <script>
+        $("#btn1").click(function () {
+            var li = $("<li></li>").text("tian").prependTo($("ul"))
+        });
+
+        $("ul").delegate("li","click",function () {
+            console.log("haha")
+        })
+    </script>
+</body>
+</html>

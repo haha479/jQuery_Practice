@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+</head>
+<body>
+<input id="get" type="text">
+<input id="btnAdd" type="button" value="添加">
+<input id="btnRemove" type="button" value="删除">
+<input id="btnClone" type="button" value="复制">
+<input id="btnPaste" type="button" value="粘贴">
+    <ul id="list">
+        <li>1</li>
+        <li>2</li>
+    </ul>
+    
+    <script>
+        $("#btnAdd").click(function () {
+            //获取用户输入的信息
+            var content = $("#get").val()
+            var li = $("<li></li>").text(content).appendTo($("#list"))
+        });
+
+        $("#btnRemove").click(function () {
+            //获取用户的输入的索引
+            var index = $("#get").val()
+
+            $("ul li").eq(index).remove()
+
+        })
+        var cloneContent;
+        $("#btnClone").click(function () {
+            //获取用户的输入的 索引
+            var index = $("#get").val()
+            //将复制的值赋值给一个变量
+            cloneContent = $("ul li").eq(index).clone()
+        })
+        $("#btnPaste").click(function () {
+            //将上面复制的值粘贴到ul里面
+            $("#list").append(cloneContent)
+
+        })
+    </script>
+</body>
+</html>

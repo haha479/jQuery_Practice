@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        .hide{
+            display: none;
+        }
+        table{
+            width: 300px;
+            /*height: 200px;*/
+            border-collapse: collapse;
+        }
+        .modal{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 400px;
+            margin-left: -250px;
+            margin-top: -200px;
+            background: silver;
+            z-index: 10;
+        }
+        .shadom{
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0.6;
+            background: black;
+            z-index: 9;
+        }
+    </style>
+</head>
+<body>
+    <button id="btnAdd">添加</button>
+    <table border="1">
+        <tr>
+            <td>1.1.11</td>
+            <td>50</td>
+            <td>
+                <a class="edit">编辑</a> | <a class="btnRemove">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td>1.1.12</td>
+            <td>60</td>
+            <td>
+                <a class="edit">编辑</a> | <a class="btnRemove">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td>1.1.13</td>
+            <td>70</td>
+            <td>
+                <a class="edit">编辑</a> | <a class="btnRemove">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td>1.1.14</td>
+            <td>80</td>
+            <td>
+                <a class="edit">编辑</a> | <a class="btnRemove">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td>1.1.15</td>
+            <td>90</td>
+            <td>
+                <a class="edit">编辑</a> | <a class="btnRemove">删除</a>
+            </td>
+        </tr>
+
+    </table>
+
+    <!--自己写一个对话框-->
+    <div class="modal hide">
+        <div>
+            <input name="hostname" type="text" value="haha">
+            <input name="portname" type="text" value="jaja">
+            <button id="btnReady">确定</button>
+            <button id="btnCancle">取消</button>
+        </div>
+    </div>
+
+    <!--加一个遮罩层-->
+    <div class="shadom hide"></div>
+
+    <script>
+        //给删除按钮绑定
+        $(".btnRemove").on("click",function () {
+            $(this).parents("tr").remove("tr")
+        })
+        //给添加按钮绑定
+        $("#btnAdd").on("click",function (e) {
+            e = e || window.event;
+            //点击时显示对话框和遮罩层
+            $(".modal,.shadom").removeClass("hide");
+
+            //清空输入框内的内容
+            $(".modal input[name='portname']").val("");
+            $(".modal input[name='hostname']").val("")
+
+        });
+        //给取消按钮绑定
+        $("#btnCancle").on("click",function (e) {
+            e = e || window.event;
+            //隐藏对话框
+            $(".modal,.shadom").addClass("hide")
+        });
+
+        //给确定按钮绑定
+        $("#btnReady").on("click",function (e) {
+            e = e || window.event;
+            //隐藏对话框
+            $(".modal,.shadom").addClass("hide")
+            //创建tr并将tr添加到table
+            var tr = $("<tr></tr>").appendTo($("table"));
+
+            //获取到文本中输入的内容
+            var portVal =  $(".modal input[name='portname']").val()
+            var hostVal =  $(".modal input[name='hostname']").val()
+            //创建td并添加到tr中
+            var td = $("<td></td>").text(portVal).appendTo(tr)
+            var td = $("<td></td>").text(hostVal).appendTo(tr)
+            var td = $("<td></td>").appendTo(tr)
+            //创建超链接
+            var a = $("<a></a>").text("编辑 |").addClass("edit").appendTo(td)
+            var a = $("<a></a>").text(" 删除").addClass("btnRemove").appendTo(td)
+
+        });
+        //给编辑按钮绑定
+        $(".edit").on("click",clickHandler);
+        function clickHandler(e) {
+            e = e || window.event;
+            //在点了编辑按钮后，就将td内的元素写入到input当中
+            //获取点击的这行信息
+            $(".modal,.shadom").removeClass("hide");
+            //获取两个td
+            var tds = $(this).parent().prevAll();
+            //获取两个td的文本内容
+            var port = $(tds[0]).text();
+            var host = $(tds[1]).text();
+            //将输入框的内容显示成获取的td的内容
+            $(".modal input[name='portname']").val(port);
+            $(".modal input[name='hostname']").val(host)
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        .select{
+            padding:30px 0;
+        }
+        .vi{
+            background: skyblue;
+        }
+        a{
+            padding: 10px;
+            color: antiquewhite;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="select">
+        <input id="checkboxAll" type="button" value="全选">
+        <input id="checkboxReverse" type="button" value="反选">
+        <input id="checkboxCancel" type="button" value="取消">
+        <a href="javascript:;">进入编辑模式</a>
+    </div>
+    <table border="1">
+        <tr>
+            <th>选择</th>
+            <th>主机</th>
+            <th>端口</th>
+            <th>状态</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td class="zj">v1</td>
+            <td>v11</td>
+            <td>
+                <select name="state" disabled>
+                    <option value="yes">在线</option>
+                    <option value="no">不在线</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td class="zj">v1</td>
+            <td>v11</td>
+            <td>
+                <select name="state" disabled="disabled">
+                    <option value="yes">在线</option>
+                    <option value="no">不在线</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td class="zj">v1</td>
+            <td>v11</td>
+            <td>
+                <select name="state" disabled>
+                    <option value="yes">在线</option>
+                    <option value="no">不在线</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        //全选
+        $("#checkboxAll").click(function () {
+            $("input[type=checkbox]").prop("checked",true)
+        });
+        //反选
+        $("#checkboxReverse").click(function () {
+            $.each($("input[type=checkbox]"),function () {
+                //三元运算
+                var v = $(this).prop("checked") ? false : true
+                $(this).prop("checked",v)
+            })
+        });
+
+        //取消
+        $("#checkboxCancel").click(function () {
+            $.each($("input[type=checkbox]"),function () {
+                $(this).prop("checked",false)
+            })
+        });
+
+        //给编辑模式绑定单击函数
+        $("a").on("click",clickHandler);
+        function clickHandler(e) {
+            e = e || window.event;
+            //如果是点击的状态
+            if ($(this).hasClass("vi")){
+                $(this).removeClass("vi");
+                //取消编辑时，删除所有选中框一行的input
+                $.each($(".zj"),function () {
+                    $(this).remove()
+                })
+              //如果是取消的状态
+            }else{
+                $(this).addClass("vi");
+                //遍历所有的选择框
+                $.each($("input[type=checkbox]"),function () {
+                    //对选中的进行操作
+                    if($(this).prop("checked")){
+                        //清空v1里边的内容
+                        var td = $(this).parent().next();
+                        td.text("");
+                        //创建一个input并且添加到td内
+                        var input = $("<input type='text' />").appendTo(td)
+                    }
+                })
+            }
+        }
+
+        //选中的一行tr进入编辑模式
+        //      进入编辑模式后，将第二个td的内容删除，并且添加一个input进去
+        //      下拉菜单变成可选中删除disabled
+        // 取消编辑模式后，
+        //      将第二个td中输入的内容重新写入td
+        //      所有的下拉菜单添加disabled
+        //
+    </script>
+
+</body>
+</html>

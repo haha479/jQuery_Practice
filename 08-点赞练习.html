@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        .container{
+            padding: 50px;
+            border-bottom: 1px black solid;
+        }
+        .item{
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">
+            <span>赞</span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="item">
+            <span>赞</span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="item">
+            <span>赞</span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="item">
+            <span>赞</span>
+        </div>
+    </div>
+    <script>
+        //为每一个item绑定单机
+        $(".item").click(function () {
+            //创建span元素并且添加到点击的div中
+            var span = $("<span></span>").text("+1").css({
+                color:"green",
+                position:"absolute",
+                left:15,
+                top:0
+            }).appendTo(this);
+            //定义元素的默认值
+            var left = 15;
+            var top = 0;
+            var opacity = 1;
+            var fontSize = 15;
+            //定时器,让元素慢慢变化
+            var obj = setInterval(function () {
+                left +=5;
+                top -=10;
+                opacity -=0.1;
+                fontSize += 5;
+                $(span).css({
+                    left:left,
+                    top:top,
+                    opacity:opacity,
+                    fontSize:fontSize
+                });
+                //如果元素完全透明则关闭定时器,并且删除元素
+                if (opacity<0){
+                    clearInterval(obj);
+                    $(span).remove()
+                }
+            },80)
+
+        })
+    </script>
+</body>
+</html>

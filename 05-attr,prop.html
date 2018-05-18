@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <script src="js/jquery-3.2.1.js"></script>
+</head>
+<body>
+<input type="button" value="确认">
+<input type="checkbox" id="checkbox" >
+<script>
+    //添加一个name属性，属性值是haha
+    $("input[type='checkbox']").attr("name","haha")
+//    console.log( $("input[type='checkbox']"))
+    //查看一个属性的值
+    console.log($("input[type='checkbox']").attr("name"))
+    //删除属性
+    $("input[type='checkbox']").removeAttr("name")
+    console.log($("input[type='checkbox']").attr("name"))
+    //选中单选按钮
+    $("#checkbox").prop("checked",true)
+    //取消
+    $("#checkbox").prop("checked",false)
+</script>
+</body>
+</html>
